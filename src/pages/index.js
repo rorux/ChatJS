@@ -7,7 +7,7 @@ import editPassword from "./editPassword";
 import serverError from "./serverError";
 import notFound from "./notFound";
 
-export default pages = {
+export default {
   "": chats(),
   auth: auth(),
   signup: signup(),
