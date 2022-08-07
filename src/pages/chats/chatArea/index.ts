@@ -2,7 +2,7 @@ import Component from "../../../services/Component";
 import tpl from "./tpl";
 import Toolbar from "../../../components/toolbar";
 import messageList from "../../../components/messageList";
-import messageForm from "../../../components/MessageForm";
+import messageForm from "../../../components/messageForm";
 
 export class ChatsArea extends Component {
   render() {
