@@ -1,6 +1,6 @@
 import Component from "../../services/Component";
 import tpl from "./tpl";
-import MessageItem from "../MessageItem";
+import MessageItem from "../messageItem";
 import "./messages.scss";
 
 export class MessageList extends Component {
