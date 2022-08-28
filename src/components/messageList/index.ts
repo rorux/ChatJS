@@ -1,4 +1,4 @@
-import Component from "../../services/Component";
+import Component from "../../core/Component";
 import tpl from "./tpl";
 import MessageItem from "../messageItem";
 import "./messages.scss";

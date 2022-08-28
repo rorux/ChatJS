@@ -1,4 +1,4 @@
-export default function render(query: string, component: any) {
+export default function render(query: string, component: any): void {
   const root = document.querySelector<HTMLElement>(query);
 
   if (root) {
@@ -6,5 +6,4 @@ export default function render(query: string, component: any) {
   }
 
   component.dispatchComponentDidMount();
-  return root;
 }

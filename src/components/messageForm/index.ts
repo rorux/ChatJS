@@ -1,4 +1,4 @@
-import Component from "../../services/Component";
+import Component from "../../core/Component";
 import tpl from "./tpl";
 import MessageFormFile from "../messageFormFile";
 import MessageFormInput from "../messageFormInput";
