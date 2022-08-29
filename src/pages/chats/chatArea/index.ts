@@ -11,10 +11,6 @@ export class ChatsArea extends Component {
   render() {
     return this.compile(tpl);
   }
-  componentDidUpdate(oldProps: TpropsAndChilds, newProps: TpropsAndChilds) {
-    console.log(oldProps)
-    return !(oldProps['name'] == newProps['name']);
-  }
 }
 
 const ChatsAreaConnectedStore = connect(ChatsArea, (state) => {

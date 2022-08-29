@@ -20,7 +20,7 @@ const UsersAPI = {
       const res = await httpInstance.put(`${BASE_URL_API}/api/v2/user/profile`, data)
       return {
         status: res.status,
-        response: typeof res.response === 'object' ? JSON.parse(res.response) : res.response
+        response: JSON.parse(res.response)
       }
     } catch (error) {
       return error;
@@ -32,7 +32,7 @@ const UsersAPI = {
       const res = await httpInstance.put(`${BASE_URL_API}/api/v2/user/password`, data)
       return {
         status: res.status,
-        response: typeof res.response === 'object' ? JSON.parse(res.response) : res.response
+        response: JSON.parse(res.response)
       }
     } catch (error) {
       return error;
@@ -44,7 +44,7 @@ const UsersAPI = {
       const res = await httpInstance.put(`${BASE_URL_API}/api/v2/user/profile/avatar`, data)
       return {
         status: res.status,
-        response: typeof res.response === 'object' ? JSON.parse(res.response) : res.response
+        response: JSON.parse(res.response)
       }
     } catch (error) {
       return error;

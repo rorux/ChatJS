@@ -213,7 +213,6 @@ export default class Component {
   }
 
   componentDidUpdate(oldProps: TpropsAndChilds, newProps: TpropsAndChilds) {
-    console.log(oldProps, newProps);
     return true;
   }
 
@@ -242,7 +241,7 @@ export default class Component {
         return typeof value === "function" ? value.bind(target) : value;
       },
 
-      set(target: TpropsAndChilds, prop: string, value) {
+      set: (target: TpropsAndChilds, prop: string, value) => {
         if (target[prop] !== value) {
           target[prop] = value;
           this._setUpdate = true;

@@ -6,7 +6,7 @@ export default `
         <label for="avatar" class="avatar-label">
           Выбрать новый аватар
         </label>
-        <img src="{{ avatar }}" alt="" width="130" height="130" />
+        <img src="{{avatarPicture}}" alt="" width="130" height="130" />
         <input type="submit" class="button form-edit__avatar-send" value="Изменить аватар" style="margin-bottom: 5px">
         <div class="success"></div>
         <div class="error"></div>

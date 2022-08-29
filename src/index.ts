@@ -17,7 +17,7 @@ import "./style.scss";
   router
       .use('/auth', EmptyLayout, 'div', {content: auth()})
       .use('/sign-up', EmptyLayout, 'div', {content: signup()})
-      .use('/settings', EmptyLayout, 'div', {content: await profile()})
+      .use('/settings', EmptyLayout, 'div', {content: profile()})
       .use('/edit-profile', EmptyLayout, 'div', {content: await editProfile()})
       .use('/edit-password', EmptyLayout, 'div', {content: editPassword()})
       .use('/server-error', EmptyLayout, 'div', {content: serverError()})

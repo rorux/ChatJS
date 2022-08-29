@@ -1,9 +1,11 @@
 import Component from "../../core/Component";
 import tpl from "./tpl";
 import formInputEdit from "../../components/formInputEdit";
-import { AuthAPI, UsersAPI } from "../../api";
+import { UsersAPI } from "../../api";
 import Validation from "../../services/Validation";
 import Router from "../../core/Router";
+import {TUser} from "../../api/auth";
+import { Actions } from "../../core/Store";
 
 export class EditProfile extends Component {
   render() {
@@ -47,7 +49,7 @@ export class EditProfile extends Component {
           if(result?.status !== 200 && result?.response.reason) {
             errorMsg.innerText = result?.response.reason
           } else {
-            (new Router()).go('/edit-profile');
+            Actions.changeUserData({ ...result?.response });
           }
         }).catch(error => console.log(error))
 
@@ -57,69 +59,69 @@ export class EditProfile extends Component {
   }
 }
 
-export default (): Promise<Component> => {
-  return AuthAPI.getUserInfo().then(
-    resGetUser =>
-      new EditProfile("div", {
-        attr: { class: "content-center" },
-        formInputEditEmail: new formInputEdit("div", {
-          type: "text",
-          param: "email",
-          name: "Почта",
-          value: resGetUser.response.email,
-          disabled: false,
-          attr: { class: "form-edit__group" },
-        }),
-        formInputEditLogin: new formInputEdit("div", {
-          type: "text",
-          param: "login",
-          name: "Логин",
-          value: resGetUser.response.login,
-          disabled: false,
-          attr: { class: "form-edit__group" },
-        }),
-        formInputEditFirstName: new formInputEdit("div", {
-          type: "text",
-          param: "first_name",
-          name: "Имя",
-          value: resGetUser.response.first_name,
-          disabled: false,
-          attr: { class: "form-edit__group" },
-        }),
-        formInputEditLastName: new formInputEdit("div", {
-          type: "text",
-          param: "second_name",
-          name: "Фамилия",
-          value: resGetUser.response.second_name,
-          disabled: false,
-          attr: { class: "form-edit__group" },
-        }),
-        formInputEditDisplayName: new formInputEdit("div", {
-          type: "text",
-          param: "display_name",
-          name: "Имя в чате",
-          value: resGetUser.response.display_name,
-          disabled: false,
-          attr: { class: "form-edit__group" },
-        }),
-        formInputEditTel: new formInputEdit("div", {
-          type: "tel",
-          param: "phone",
-          name: "Телефон",
-          value: resGetUser.response.phone,
-          disabled: false,
-          attr: { class: "form-edit__group" },
-        }),
-        events: {
-          focus: (e: MouseEvent) => {
-            e.preventDefault();
-            e.stopPropagation();
-          },
-          blur: (e: MouseEvent) => {
-            e.preventDefault();
-            e.stopPropagation();
-          },
-        },
-      })
-  )
+export default () => {
+  return new EditProfile("div", {
+    attr: { class: "content-center" },
+    avatarPicture: (Actions.getUserState() as TUser).avatar
+      ? `https://ya-praktikum.tech/api/v2/resources${(Actions.getUserState() as TUser).avatar}`
+      : 'img/avatar.png',
+    formInputEditEmail: new formInputEdit("div", {
+      type: "text",
+      param: "email",
+      name: "Почта",
+      value: (Actions.getUserState() as TUser).email,
+      disabled: false,
+      attr: { class: "form-edit__group" },
+    }),
+    formInputEditLogin: new formInputEdit("div", {
+      type: "text",
+      param: "login",
+      name: "Логин",
+      value: (Actions.getUserState() as TUser).login,
+      disabled: false,
+      attr: { class: "form-edit__group" },
+    }),
+    formInputEditFirstName: new formInputEdit("div", {
+      type: "text",
+      param: "first_name",
+      name: "Имя",
+      value: (Actions.getUserState() as TUser).first_name,
+      disabled: false,
+      attr: { class: "form-edit__group" },
+    }),
+    formInputEditLastName: new formInputEdit("div", {
+      type: "text",
+      param: "second_name",
+      name: "Фамилия",
+      value: (Actions.getUserState() as TUser).second_name,
+      disabled: false,
+      attr: { class: "form-edit__group" },
+    }),
+    formInputEditDisplayName: new formInputEdit("div", {
+      type: "text",
+      param: "display_name",
+      name: "Имя в чате",
+      value: (Actions.getUserState() as TUser).display_name,
+      disabled: false,
+      attr: { class: "form-edit__group" },
+    }),
+    formInputEditTel: new formInputEdit("div", {
+      type: "tel",
+      param: "phone",
+      name: "Телефон",
+      value: (Actions.getUserState() as TUser).phone,
+      disabled: false,
+      attr: { class: "form-edit__group" },
+    }),
+    events: {
+      focus: (e: MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+      },
+      blur: (e: MouseEvent) => {
+        e.preventDefault();
+        e.stopPropagation();
+      },
+    },
+  })
 }

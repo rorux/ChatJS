@@ -38,7 +38,7 @@
     "uuid": "8.3.2"
   },
   "scripts": {
-    "dev": "parcel src/index.html --no-source-maps",
+    "dev": "parcel src/index.html --no-source-maps --no-cache",
     "lint": "eslint ./src",
     "lint:style": "stylelint \"src/**.scss\"",
     "build": "parcel build src/index.html",
