@@ -1,9 +1,8 @@
-import Component from "../../core/Component";
+import Component, {TpropsAndChilds} from "../../core/Component";
 import tpl from "./tpl";
 import formInputEdit from "../../components/formInputEdit";
 import { UsersAPI } from "../../api";
 import Validation from "../../services/Validation";
-import Router from "../../core/Router";
 import {TUser} from "../../api/auth";
 import { Actions } from "../../core/Store";
 

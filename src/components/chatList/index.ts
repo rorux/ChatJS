@@ -7,7 +7,7 @@ import { ChatsAPI } from "../../api";
 import "./chatList.scss";
 
 export class ChatList extends Component {
-  render() {
+    render() {
     return this.compile(tpl);
   }
 

@@ -1,4 +1,4 @@
-import { HTTP } from '../core/http';
+import { HTTP } from '../core/HTTP';
 import { BASE_URL_API } from "./constants";
 import Store from "../core/Store/Store";
 

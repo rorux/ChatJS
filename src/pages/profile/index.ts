@@ -10,59 +10,59 @@ import connect from "../../core/Store/Connect";
 export class Profile extends Component {
   constructor(tag: string, props: TpropsAndChilds) {
     props.attr = {class: "content-center"},
-      props.displayName = (Actions.getUserState() as TUser).display_name,
-      props.formInputEditEmail = new formInputEdit("div", {
-        type: "text",
-        param: "email",
-        name: "Почта",
-        value: (Actions.getUserState() as TUser).email,
-        disabled: true,
-        attr: {class: "form-edit__group"},
-      }),
-      props.avatarPicture = (Actions.getUserState() as TUser).avatar
-        ? `https://ya-praktikum.tech/api/v2/resources${(Actions.getUserState() as TUser).avatar}`
-        : 'img/avatar.png',
-      props.formInputEditLogin = new formInputEdit("div", {
-        type: "text",
-        param: "login",
-        name: "Логин",
-        value: (Actions.getUserState() as TUser).login,
-        disabled: true,
-        attr: {class: "form-edit__group"},
-      }),
-      props.formInputEditFirstName = new formInputEdit("div", {
-        type: "text",
-        param: "first_name",
-        name: "Имя",
-        value: (Actions.getUserState() as TUser).first_name,
-        disabled: true,
-        attr: {class: "form-edit__group"},
-      }),
-      props.formInputEditLastName = new formInputEdit("div", {
-        type: "text",
-        param: "second_name",
-        name: "Фамилия",
-        value: (Actions.getUserState() as TUser).second_name,
-        disabled: true,
-        attr: {class: "form-edit__group"},
-      }),
-      props.formInputEditDisplayName = new formInputEdit("div", {
-        type: "text",
-        param: "display_name",
-        name: "Имя в чате",
-        value: (Actions.getUserState() as TUser).display_name,
-        disabled: true,
-        attr: {class: "form-edit__group"},
-      }),
-      props.formInputEditTel = new formInputEdit("div", {
-        type: "tel",
-        param: "phone",
-        name: "Телефон",
-        value: (Actions.getUserState() as TUser).phone,
-        disabled: true,
-        attr: {class: "form-edit__group"},
-      }),
-      super(tag, props)
+    props.displayName = (Actions.getUserState() as TUser).display_name,
+    props.formInputEditEmail = new formInputEdit("div", {
+      type: "text",
+      param: "email",
+      name: "Почта",
+      value: props.email,
+      disabled: true,
+      attr: {class: "form-edit__group"},
+    }),
+    props.avatarPicture = props.avatar
+      ? `https://ya-praktikum.tech/api/v2/resources${props.avatar}`
+      : 'img/avatar.png',
+    props.formInputEditLogin = new formInputEdit("div", {
+      type: "text",
+      param: "login",
+      name: "Логин",
+      value: props.login,
+      disabled: true,
+      attr: {class: "form-edit__group"},
+    }),
+    props.formInputEditFirstName = new formInputEdit("div", {
+      type: "text",
+      param: "first_name",
+      name: "Имя",
+      value: props.first_name,
+      disabled: true,
+      attr: {class: "form-edit__group"},
+    }),
+    props.formInputEditLastName = new formInputEdit("div", {
+      type: "text",
+      param: "second_name",
+      name: "Фамилия",
+      value: props.second_name,
+      disabled: true,
+      attr: {class: "form-edit__group"},
+    }),
+    props.formInputEditDisplayName = new formInputEdit("div", {
+      type: "text",
+      param: "display_name",
+      name: "Имя в чате",
+      value: props.display_name,
+      disabled: true,
+      attr: {class: "form-edit__group"},
+    }),
+    props.formInputEditTel = new formInputEdit("div", {
+      type: "tel",
+      param: "phone",
+      name: "Телефон",
+      value: props.phone,
+      disabled: true,
+      attr: {class: "form-edit__group"},
+    }),
+    super(tag, props)
   }
   render() {
     return this.compile(tpl);
@@ -86,17 +86,21 @@ export class Profile extends Component {
       const form = new FormData(sendAvatarForm);
 
       UsersAPI.changeAvatar({ data: form })
-        .then((res) => {
-          if(res.status === 200) {
-            Actions.changeUserData(res.response)
-            successMsg.innerText = 'Аватар изменен!';
-            errorMsg.innerText = '';
-          }
-          else {
-            errorMsg.innerText = 'Аватар не изменен, выберите изображение!';
-            successMsg.innerText = '';
-          }
-        });
+       .then((res) => {
+         if(res.status === 200) {
+           Actions.changeUserData({...res.response})
+           const avatarPicture_ = this._props.avatar
+             ? `https://ya-praktikum.tech/api/v2/resources${this._props.avatar}`
+             : 'img/avatar.png';
+           this.setProps({avatarPicture: avatarPicture_});
+           successMsg.innerText = 'Аватар изменен!';
+           errorMsg.innerText = '';
+         }
+         else {
+           errorMsg.innerText = 'Аватар не изменен, выберите изображение!';
+           successMsg.innerText = '';
+         }
+       });
     });
   }
 }

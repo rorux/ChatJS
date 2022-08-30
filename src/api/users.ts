@@ -1,4 +1,4 @@
-import {HTTP, TOptions} from '../core/http';
+import {HTTP, TOptions} from '../core/HTTP';
 import { BASE_URL_API } from "./constants";
 import { TSignUp } from "./auth";
 

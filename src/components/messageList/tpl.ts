@@ -1,5 +1,5 @@
 export default `
-  <p class="messages__date">19 июня</p>
+  <p class="messages__date">Активный чат: <strong>{{name}}</strong></p>
   {{{ messageItem1 }}}
   {{{ messageItem2 }}}
   {{{ messageItem3 }}}
