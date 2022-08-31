@@ -5,6 +5,7 @@ import { TChat } from "../../api/chats";
 export type TStore = {
   user?: TUser;
   chat?: TChat;
+  token?: string;
 }
 
 export default class Store extends EventBus {

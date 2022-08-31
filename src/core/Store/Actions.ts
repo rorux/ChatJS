@@ -22,9 +22,20 @@ const changeChatData = (chat: TChat) => {
   store.set('chat', chat);
 }
 
+const getTokenState = (): string | null => {
+  const state = store.getState();
+  return state.token ?? null;
+}
+
+const setTokenState = (token: string) => {
+  store.set('token', token);
+}
+
 export {
   getUserState,
   changeUserData,
   getChatState,
-  changeChatData
+  changeChatData,
+  setTokenState,
+  getTokenState
 }

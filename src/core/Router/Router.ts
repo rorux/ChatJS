@@ -33,6 +33,8 @@ export default class Router {
   start() {
     window.onpopstate = (() => { this._onRoute(window.location.pathname) });
     this._onRoute(window.location.pathname);
+    if(window.location.pathname === '/')
+      this.go('/auth')
   }
 
   go(path: string | null) {

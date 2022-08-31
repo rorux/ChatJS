@@ -6,7 +6,7 @@ import "./toolbar.scss";
 
 export default class Toolbar extends Component {
   constructor(tag: string, props: TpropsAndChilds) {
-    props.displayName = (Actions.getUserState() as TUser).display_name
+    props.firstName = (Actions.getUserState() as TUser).first_name
     super(tag, props)
   }
   render() {

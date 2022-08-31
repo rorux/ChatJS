@@ -18,10 +18,10 @@ import "./style.scss";
       .use('/auth', EmptyLayout, 'div', {content: auth()})
       .use('/sign-up', EmptyLayout, 'div', {content: signup()})
       .use('/settings', EmptyLayout, 'div', {content: profile()})
-      .use('/edit-profile', EmptyLayout, 'div', {content: await editProfile()})
+      .use('/edit-profile', EmptyLayout, 'div', {content: editProfile()})
       .use('/edit-password', EmptyLayout, 'div', {content: editPassword()})
       .use('/server-error', EmptyLayout, 'div', {content: serverError()})
       .use('/not-found', EmptyLayout, 'div', {content: notFound()})
-      .use('/messenger', MainLayout, 'div', {sidebar: await chatsSide(), content: await chatArea()})
+      .use('/messenger', MainLayout, 'div', {sidebar: await chatsSide(), content: chatArea()})
       .start()}
 )()

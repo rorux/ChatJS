@@ -1,18 +1,10 @@
-import Component, {TpropsAndChilds} from "../../core/Component";
+import Component from "../../core/Component";
 import tpl from "./tpl";
 import "./chatItem.scss";
 import { ChatsAPI } from "../../api";
 import { Actions } from "../../core/Store";
-import Store_ from "../../core/Store/Store";
-import Store from "../../core/Store";
 
 export default class ChatItem extends Component {
-  constructor(tagName: string, props: TpropsAndChilds) {
-    super(tagName, props);
-    Store.on(Store_.EVENT_UPDATE, () => {
-      return this.setProps(Store.getState());
-    });
-  }
   render() {
     return this.compile(tpl);
   }
@@ -41,38 +33,7 @@ export default class ChatItem extends Component {
         name: this._props.name as string,
       })
       ChatsAPI.getToken(+this._props.id)
-        .then(res => res.response.token)
-        .then(token => {
-          //@ts-ignore
-          const socket = new WebSocket(`wss://ya-praktikum.tech/ws/chats/${Actions.getUserState()?.id}/${this._props.id}/${token}`);
-
-          socket.addEventListener('open', () => {
-            console.log('Соединение установлено');
-
-            socket.send(JSON.stringify({
-              content: 'Моё первое сообщение миру!',
-              type: 'message',
-            }));
-          });
-
-          socket.addEventListener('close', event => {
-            if (event.wasClean) {
-              console.log('Соединение закрыто чисто');
-            } else {
-              console.log('Обрыв соединения');
-            }
-
-            console.log(`Код: ${event.code} | Причина: ${event.reason}`);
-          });
-
-          socket.addEventListener('message', event => {
-            console.log('Получены данные', event.data);
-          });
-
-          socket.addEventListener('error', event => {
-            console.log('Ошибка', event.message);
-          });
-        })
+        .then(res => Actions.setTokenState(res.response.token))
     })
   }
 }

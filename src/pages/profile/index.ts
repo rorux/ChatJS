@@ -4,6 +4,7 @@ import formInputEdit from "../../components/formInputEdit";
 import { AuthAPI, UsersAPI } from "../../api";
 import Router from "../../core/Router";
 import { Actions } from "../../core/Store";
+import Store from "../../core/Store/Store";
 import { TUser } from "../../api/auth";
 import connect from "../../core/Store/Connect";
 
@@ -74,6 +75,7 @@ export class Profile extends Component {
     logoutBtn.addEventListener("click", (e) => {
       e.preventDefault();
       AuthAPI.logout();
+      localStorage.removeItem(Store.STORE_NAME);
       (new Router()).go('/auth');
     })
 
